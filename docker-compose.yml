@@ -1,10 +1,8 @@
-
 services:
   traefik:
     image: traefik:v2.5.7
     restart: unless-stopped
     command:
-      - "--api.insecure=true"
       - "--providers.docker=true"
       - "--providers.docker.network=web" # Общая сеть для всех проектов
       - "--entrypoints.web.address=:80"
@@ -15,7 +13,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "8080:8080" # Dashboard для Traefik
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "./letsencrypt:/letsencrypt" # Директория для хранения SSL сертификатов
